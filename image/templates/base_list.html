@@ -10,9 +10,18 @@ entity list
 {% endblock %}
 
 {% block content %}
+    <ol>
     {% for entity in entities %}
-        <img data-entity-id="{{ entity.id }}" src="{{ entity.image.url }}" />
+        <li data-entity-id="{{ entity.id }}" class="row">
+            <div class="col-md-8">
+                <img src="{{ entity.image.url }}" />
+            </div>
+            <div class="col-md-4">
+                <a class="fft" href="{% url 'fft' id=entity.id x=0 y=0 xx=400 yy=400 %}">fft</a>
+            </div>
+        </li>
     {% endfor %}
+    </ol>
 {% endblock %}
 
 {% block script %}
@@ -26,5 +35,24 @@ entity list
             multi: false
         });
     }
+
+    document.addEventListener('crop.change', function(e) {
+        var crop = e.cropTarget;
+        var select_image = e.target;
+        var x = crop.pos.x;
+        var y = crop.pos.y;
+        var xx = crop.pos.x + crop.pos.w;
+        var yy = crop.pos.y + crop.pos.h;
+
+        var li = select_image.parentElement.parentElement.parentElement;
+        var link = li.querySelector("a.fft");
+        var href = link.getAttribute("href");
+
+        href = href.split("/");
+        href[href.length - 1] = String(x) + "-" + String(y) + "-" + String(xx) + "-" + String(yy);
+        href = href.join("/");
+
+        link.setAttribute("href", href);
+    });
 </script>
 {% endblock %}
