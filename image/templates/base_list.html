@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+entity list
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
+<script src="https://unpkg.com/jcrop"></script>
+{% endblock %}
+
+{% block content %}
+    {% for entity in entities %}
+        <img data-entity-id="{{ entity.id }}" src="{{ entity.image.url }}" />
+    {% endfor %}
+{% endblock %}
+
+{% block script %}
+<script>
+    var images = document.getElementsByTagName("img");
+
+    for (var i = 0; i < images.length; i++)
+    {
+        Jcrop.attach(images[i], {
+            shadeColor: 'red',
+            multi: false
+        });
+    }
+</script>
+{% endblock %}

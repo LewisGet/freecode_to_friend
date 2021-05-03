@@ -14,10 +14,8 @@ def image_view(request):
         form = EntityForm(request.POST, request.FILES)
 
         if form.is_valid():
-            print(request.FILES)
-            exit()
             form.save()
-            return redirect('fft')
+            return redirect('image_list')
 
     return render(request, 'base_form.html', {'form': form})
 
@@ -71,3 +69,10 @@ def image_fft(request, id, x, y, xx, yy):
     entity.save()
 
     return render(request, 'base_view.html', {'entity': entity})
+
+
+def image_list(request):
+    entities = Entity.objects.all()
+
+    return render(request, 'base_list.html', {'entities': entities})
+
