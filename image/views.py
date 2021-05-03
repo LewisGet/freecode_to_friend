@@ -21,6 +21,7 @@ def image_view(request):
 
     return render(request, 'base_form.html', {'form': form})
 
+
 def image_fft(request, id, x, y, xx, yy):
     """
     this code just paste on
