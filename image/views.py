@@ -41,8 +41,10 @@ def image_fft(request, id, x, y, xx, yy):
     entity = Entity.objects.get(pk=id)
     _, ext = os.path.splitext(entity.image.path)
 
-    #this code just paste on
     img = cv2.imread(entity.image.path, 0)
+    img = img[y:yy, x:xx]
+
+    #this code just paste on
     f = cv2.dft(np.float32(img), flags=cv2.DFT_COMPLEX_OUTPUT)
     f_shift = np.fft.fftshift(f)
     f_complex = f_shift[:, :, 0] + 1j * f_shift[:, :, 1]
