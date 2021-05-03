@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from .models import *
 from .forms import *
 
 
@@ -15,5 +16,7 @@ def image_view(request):
 
     return render(request, 'base_form.html', {'form': form})
 
-def image_fft(request):
-    pass
+def image_fft(request, id, x, y, xx, yy):
+    entity = Entity.objects.get(pk=id)
+
+    return render(request, 'base_view.html', {'entity': entity})

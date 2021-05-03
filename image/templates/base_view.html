@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ entity.id }}
+{% endblock %}
+
+{% block content %}
+<img src="{{ entity.image.url }}" />
+{% endblock %}
