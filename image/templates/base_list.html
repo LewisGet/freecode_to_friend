@@ -10,14 +10,14 @@ entity list
 {% endblock %}
 
 {% block content %}
-    <ol>
+    <ol class="row">
     {% for entity in entities %}
-        <li data-entity-id="{{ entity.id }}" class="row">
-            <div class="col-md-8">
+        <li data-entity-id="{{ entity.id }}" class="col-md-12">
+            <div class="card-body">
                 <img src="{{ entity.image.url }}" />
             </div>
-            <div class="col-md-4">
-                <a class="fft" href="{% url 'fft' id=entity.id x=0 y=0 xx=400 yy=400 %}">fft</a>
+            <div class="card-body">
+                <a class="fft btn btn-primary" href="{% url 'fft' id=entity.id x=0 y=0 xx=400 yy=400 %}">fft</a>
             </div>
         </li>
     {% endfor %}
