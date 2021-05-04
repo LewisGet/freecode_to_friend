@@ -57,8 +57,8 @@ def image_fft(request, id, x, y, xx, yy):
     cache_file_path = os.path.join(settings.FFT_CACHE, md5_name + ext)
     cv2.imwrite(cache_file_path, f_img)
 
-    if not os.path.exists(cache_file_path):
-        os.makedirs(cache_file_path)
+    if not os.path.exists(settings.FFT_CACHE):
+        os.makedirs(settings.FFT_CACHE)
 
     cf = open(cache_file_path, 'rb')
 
