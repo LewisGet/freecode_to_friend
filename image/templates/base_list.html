@@ -18,6 +18,7 @@ entity list
             </div>
             <div class="card-body">
                 <a class="fft btn btn-primary" href="{% url 'fft' id=entity.id x=0 y=0 xx=400 yy=400 %}">fft</a>
+                <p class="card-text">{{ entity.created_at|date:'Y-m-d H:i' }}</p>
             </div>
         </li>
     {% endfor %}
