@@ -12,11 +12,16 @@ entity list
 {% block content %}
     <ol class="row">
     {% for entity in entities %}
-        <li data-entity-id="{{ entity.id }}" class="col-md-12">
-            <div class="card-body">
-                <img src="{{ entity.image.url }}" />
+        <li data-entity-id="{{ entity.id }}" class="col-md-12 row">
+            <div class="col-md-6">
+                <img class="source-images" src="{{ entity.image.url }}" />
             </div>
-            <div class="card-body">
+            <div class="col-md-6">
+                {% if entity.fft_image %}
+                <img src="{{ entity.fft_image.url }}" />
+                {% endif %}
+            </div>
+            <div class="col-md-12 card-body">
                 <a class="fft btn btn-primary" href="{% url 'fft' id=entity.id x=0 y=0 xx=400 yy=400 %}">fft</a>
                 <p class="card-text">{{ entity.created_at|date:'Y-m-d H:i' }}</p>
             </div>
@@ -27,7 +32,7 @@ entity list
 
 {% block script %}
 <script>
-    var images = document.getElementsByTagName("img");
+    var images = document.getElementsByClassName("source-images");
 
     for (var i = 0; i < images.length; i++)
     {
