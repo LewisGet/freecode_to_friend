@@ -62,13 +62,10 @@ def image_fft(request, id, x, y, xx, yy):
 
     cf = open(cache_file_path, 'rb')
 
-    entity = Entity.objects.create(
-        image=File(cf, name=md5_name)
-    )
-
+    entity.fft_image = File(cf, name=md5_name)
     entity.save()
 
-    return render(request, 'base_view.html', {'entity': entity})
+    return redirect('image_list')
 
 
 def image_list(request):
